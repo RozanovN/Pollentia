@@ -44,7 +44,7 @@
         /**
          * Shows an invalid id.
          */
-        constexpr idType InvalidIdMask {idType{(idType{1} << (sizeof(idType) * 8 - 1))}};
+        constexpr idType invalidIdMask {idType{(idType{1} << (sizeof(idType) * 8 - 1))}};
 
         using generationType = std::conditional_t<generationBits <= 16,
             std::conditional_t<generationBits <= 8, unsigned8bit, unsinged16int>, unsigned32int>;
@@ -62,18 +62,18 @@
         /**
          * Returns true if id is valid, otherwise false.
          *
-         * @param id idType representing an id
+         * @param id an unsigned integer representing an id
          * @return true if id is valid, else false.
          */
         inline bool is_valid(idType id) {
-            return id != InvalidIdMask;
+            return id != invalidIdMask;
         }
 
         /**
          * Returns the index part of the given id.
          *
-         * @param id idType representing an id
-         * @return idType the masked id
+         * @param id an unsigned integer representing an id
+         * @return an unsigned integer representing the masked id
          */
         inline idType index(idType id) {
             return id & indexMask;
@@ -82,8 +82,8 @@
         /**
          * Returns the generation part of the given id.
          *
-         * @param id idType representing an id
-         * @return idType the masked id
+         * @param id an unsigned integer representing an id
+         * @return an unsigned integer representing the masked id
          */
         inline idType generation(idType id) {
             return (id >> indexBits) & generationMask;
@@ -95,14 +95,32 @@
          * Checks if new generation is less than MAX_GENERATION.
          *
          * @see MAX_GENERATION
-         * @param id idType representing an id
-         * @return idType the masked id with the new generation
+         * @param id an unsigned integer representing an id
+         * @return an unsigned integer representing the masked id with the new generation
          */
         inline idType new_generation(idType id) {
             const idType generation {Id::generation(id) + 1};
             assert(generation < MAX_GENERATION);
             return index(id) | (generation << indexBits);
         }
-}
+
+    }
+
+    #if _DEBUG
+        namespace internal {
+            struct BaseId {
+                constexpr explicit baseId(idType) : _id{id} {}
+                constexpr operator idType() const {return _id;}
+                private:
+                    idType _id;
+            };
+        }
+        #define DEFINE_ID_TYPE(name) using name struct name final : id:internal::BaseId { \
+                constexpr explicit name(Id::idType id) : BaseId {id} {};                  \
+                constexpr name() : BaseId{Id:invalidIdMask} {}                            \
+           };
+    #else
+        #define DEFINE_ID_TYPE(name) using name = Id::idType;
+    #endif
 
 #endif //GAMEENGINE_ID_H
