@@ -73,7 +73,7 @@
          * Returns the index part of the given id.
          *
          * @param id idType representing an id
-         * @return the masked id
+         * @return idType the masked id
          */
         inline idType index(idType id) {
             return id & indexMask;
@@ -83,7 +83,7 @@
          * Returns the generation part of the given id.
          *
          * @param id idType representing an id
-         * @return the masked id
+         * @return idType the masked id
          */
         inline idType generation(idType id) {
             return (id >> indexBits) & generationMask;
@@ -96,7 +96,7 @@
          *
          * @see MAX_GENERATION
          * @param id idType representing an id
-         * @return
+         * @return idType the masked id with the new generation
          */
         inline idType new_generation(idType id) {
             const idType generation {Id::generation(id) + 1};
