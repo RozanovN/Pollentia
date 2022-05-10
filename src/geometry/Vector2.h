@@ -6,7 +6,7 @@
 #define GAMEENGINE_VECTOR2_H
 
 /**
- * Represents Vector2.
+ * Represents a 2 dimensional vector.
  *
  * @author Nikolay Rozanov
  * @version 1.0
@@ -18,13 +18,12 @@ class Vector2 {
     public:
 
         /**
-         * Creates a Vector2 with 0 for x and 0 for y.
+         * Constructs a new 2 dimensional vector with 0 for x and 0 for y.
          */
-
         Vector2();
 
         /**
-         * Creates a Vector2 with custom properties.
+         * Constructs a new 2 dimensional vector with custom properties.
          *
          * @param x a double representing x value
          * @param y a double representing y value
@@ -32,7 +31,7 @@ class Vector2 {
         Vector2(double x, double y);
 
         /**
-         * Destructs this object.
+         * Destructs this Vector2.
          */
         ~Vector2();
 

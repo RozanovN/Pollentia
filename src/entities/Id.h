@@ -74,7 +74,7 @@
          * @param id an unsigned integer representing an id
          * @return true if id is valid, else false.
          */
-        inline bool is_valid(idType id) {
+        constexpr bool is_valid(idType id) {
             return id != invalidIdMask;
         }
 
@@ -84,7 +84,7 @@
          * @param id an unsigned integer representing an id
          * @return an unsigned integer representing the masked id
          */
-        inline idType index(idType id) {
+        constexpr idType index(idType id) {
             // check if index part is valid
             assert((id & internal::indexMask)  != internal::indexMask);
             return id & internal::indexMask;
@@ -96,7 +96,7 @@
          * @param id an unsigned integer representing an id
          * @return an unsigned integer representing the masked id
          */
-        inline idType generation(idType id) {
+        constexpr idType generation(idType id) {
             return (id >> internal::indexBits) & internal::generationMask;
         }
 
@@ -109,7 +109,7 @@
          * @param id an unsigned integer representing an id
          * @return an unsigned integer representing the masked id with the new generation
          */
-        inline idType new_generation(idType id) {
+        constexpr idType new_generation(idType id) {
             const idType generation {Id::generation(id) + 1};
             assert(generation < MAX_GENERATION);
             return index(id) | (generation << internal::indexBits);
