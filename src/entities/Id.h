@@ -4,9 +4,9 @@
 
 #ifndef GAMEENGINE_ID_H
     #define GAMEENGINE_ID_H
-    #define MAX_GENERATION 255
     #include <type_traits>
     #include "../definitions/CommonHeader.h"
+    #define MAX_GENERATION (((unsinged64int)1 << internal::indexBits) - 1)
 
     /**
      * Represents Id namespace.
@@ -21,38 +21,47 @@
          */
         using idType = unsigned32int;
 
-        /**
-         * By default 3 bits are reserved for generation.
-         */
-        constexpr unsigned32int generationBits{3};
+        // must not be accessed by other files
+        namespace internal {
+            /**
+             * By default 3 bits are reserved for generation.
+             */
+            constexpr unsigned32int generationBits {3};
 
-        /**
-         * The bits that are not assigned to generationBits are always assigned to indexBits.
-         */
-        constexpr unsigned32int indexBits {sizeof(idType) * 8 - generationBits};
+            /**
+             * The bits that are not assigned to generationBits are always assigned to indexBits.
+             */
+            constexpr unsigned32int indexBits {sizeof(idType) * 8 - generationBits};
 
-        /**
-         * Shows the indexMask as an idType.
-         */
-        constexpr idType indexMask { (idType{1} << indexBits) - 1};
+            /**
+             * Shows the indexMask as an idType.
+             */
+            constexpr idType indexMask {(idType{1} << indexBits) - 1};
 
-        /**
-         * Shows the generationMask as an idType
-         */
-        constexpr idType generationMask { (idType{1} << generationBits) - 1};
+            /**
+             * Shows the generationMask as an idType
+             */
+            constexpr idType generationMask {(idType{1} << generationBits) - 1};
+        }
 
         /**
          * Shows an invalid id.
          */
-        constexpr idType invalidIdMask {idType{(idType{1} << (sizeof(idType) * 8 - 1))}};
+        constexpr idType invalidIdMask {idType(-1)};
 
-        using generationType = std::conditional_t<generationBits <= 16,
-            std::conditional_t<generationBits <= 8, unsigned8bit, unsinged16int>, unsigned32int>;
+        /**
+         * Represents the required minimum of id removals to allows reassigning available slots in the array.
+         */
+        constexpr unsigned32int minimumDeletedElements {1024};
+
+        /// @todo add documentation for generation bits
+        using generationType = std::conditional_t<internal::generationBits <= 16,
+            std::conditional_t<internal::generationBits <= 8, unsigned8bit, unsinged16int>, unsigned32int>;
 
         /**
          * Check if generationType requires more bits than generationBits has.
          */
-        static_assert(sizeof(generationType) * 8 >= generationBits);
+        static_assert(sizeof(generationType) * 8 >= internal::generationBits);
 
         /**
          * Checks if generationType size is not bigger than idType size.
@@ -76,7 +85,9 @@
          * @return an unsigned integer representing the masked id
          */
         inline idType index(idType id) {
-            return id & indexMask;
+            // check if index part is valid
+            assert((id & internal::indexMask)  != internal::indexMask);
+            return id & internal::indexMask;
         }
 
         /**
@@ -86,7 +97,7 @@
          * @return an unsigned integer representing the masked id
          */
         inline idType generation(idType id) {
-            return (id >> indexBits) & generationMask;
+            return (id >> internal::indexBits) & internal::generationMask;
         }
 
         /**
@@ -101,7 +112,7 @@
         inline idType new_generation(idType id) {
             const idType generation {Id::generation(id) + 1};
             assert(generation < MAX_GENERATION);
-            return index(id) | (generation << indexBits);
+            return index(id) | (generation << internal::indexBits);
         }
 
     }
@@ -117,7 +128,7 @@
         }
         #define DEFINE_ID_TYPE(name) using name struct name final : id:internal::BaseId { \
                 constexpr explicit name(Id::idType id) : BaseId {id} {};                  \
-                constexpr name() : BaseId{Id:invalidIdMask} {}                            \
+                constexpr name() : BaseId{0} {}                                           \
            };
     #else
         #define DEFINE_ID_TYPE(name) using name = Id::idType;
