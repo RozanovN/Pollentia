@@ -5,7 +5,6 @@
 #ifndef GAMEENGINE_GAMEENTITY_H
     #define GAMEENGINE_GAMEENTITY_H
     #include "../entities/CommonEntityHeader.h"
-    /// @todo resolve circular dependency
 
     namespace GameEngine::GameEntity {
         DEFINE_ID_TYPE(entityId);

@@ -7,6 +7,11 @@
     #include "CommonEntityHeader.h"
 
     namespace GameEngine {
+        DEFINE_ID_TYPE(entityId);
+
+        namespace GameEntity {
+            class Entity;
+        }
 
         #define INITIALIZATION_INFO(component) namespace component {struct InitializationInfo;}
         INITIALIZATION_INFO(TransformationComponent);

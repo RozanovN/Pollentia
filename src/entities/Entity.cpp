@@ -3,6 +3,7 @@
 //
 
 #include "Entity.h"
+#include "../api/GameEntity.h"
 
 namespace GameEngine::GameEntity {
 
