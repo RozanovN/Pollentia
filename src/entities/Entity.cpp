@@ -19,7 +19,7 @@ namespace GameEngine::GameEntity {
         assert(index < generations.size());
         assert(generations[index] == Id::generation(id));
         // checks if entity at the given index matches the generation of the given entity
-        // if true, it's alive, otherwise the id was given to another entity and this entity no longer alive
+        // if true, it's alive, otherwise the id_ was given to another entity and this entity no longer alive
         return (generations[index] == Id::generation(id));
     }
 
@@ -39,7 +39,7 @@ namespace GameEngine::GameEntity {
         }
         entityId id;
 
-        // If there are free ids left, assign a free id to the Entity
+        // If there are free ids left, assign a free id_ to the Entity
         if (freeIds.size() > Id::minimumDeletedElements) {
             id = freeIds.front();
             assert(!is_alive(Entity{id}));
