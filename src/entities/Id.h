@@ -45,12 +45,12 @@
         }
 
         /**
-         * Shows an invalid id.
+         * Shows an invalid id_.
          */
         constexpr idType invalidIdMask {idType(-1)};
 
         /**
-         * Represents the required minimum of id removals to allows reassigning available slots in the array.
+         * Represents the required minimum of id_ removals to allows reassigning available slots in the array.
          */
         constexpr unsigned32int minimumDeletedElements {1024};
 
@@ -69,20 +69,20 @@
         static_assert(sizeof(idType) - sizeof(generationType) > 0);
 
         /**
-         * Returns true if id is valid, otherwise false.
+         * Returns true if id_ is valid, otherwise false.
          *
-         * @param id an unsigned integer representing an id
-         * @return true if id is valid, else false.
+         * @param id an unsigned integer representing an id_
+         * @return true if id_ is valid, else false.
          */
         constexpr bool is_valid(idType id) {
             return id != invalidIdMask;
         }
 
         /**
-         * Returns the index part of the given id.
+         * Returns the index part of the given id_.
          *
-         * @param id an unsigned integer representing an id
-         * @return an unsigned integer representing the masked id
+         * @param id an unsigned integer representing an id_
+         * @return an unsigned integer representing the masked id_
          */
         constexpr idType index(idType id) {
             // check if index part is valid
@@ -91,23 +91,23 @@
         }
 
         /**
-         * Returns the generation part of the given id.
+         * Returns the generation part of the given id_.
          *
-         * @param id an unsigned integer representing an id
-         * @return an unsigned integer representing the masked id
+         * @param id an unsigned integer representing an id_
+         * @return an unsigned integer representing the masked id_
          */
         constexpr idType generation(idType id) {
             return (id >> internal::indexBits) & internal::generationMask;
         }
 
         /**
-         * Makes new id generation.
-         * Changes the given id's generation to a newly created generation.
+         * Makes new id_ generation.
+         * Changes the given id_'s generation to a newly created generation.
          * Checks if new generation is less than MAX_GENERATION.
          *
          * @see MAX_GENERATION
-         * @param id an unsigned integer representing an id
-         * @return an unsigned integer representing the masked id with the new generation
+         * @param id an unsigned integer representing an id_
+         * @return an unsigned integer representing the masked id_ with the new generation
          */
         constexpr idType new_generation(idType id) {
             const idType generation {Id::generation(id) + 1};
@@ -120,14 +120,14 @@
     #if _DEBUG
         namespace internal {
             struct BaseId {
-                constexpr explicit baseId(idType) : _id{id} {}
+                constexpr explicit baseId(idType) : _id{id_} {}
                 constexpr operator idType() const {return _id;}
                 private:
                     idType _id;
             };
         }
-        #define DEFINE_ID_TYPE(name) using name struct name final : id:internal::BaseId { \
-                constexpr explicit name(Id::idType id) : BaseId {id} {};                  \
+        #define DEFINE_ID_TYPE(name) using name struct name final : id_:internal::BaseId { \
+                constexpr explicit name(Id::idType id_) : BaseId {id_} {};                  \
                 constexpr name() : BaseId{0} {}                                           \
            };
     #else

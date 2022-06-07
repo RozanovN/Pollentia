@@ -12,11 +12,11 @@
 #endif
 
 #if USE_STD_DEQUE
-#include <deque>
-namespace GameEngine::Utilities {
-    template<typename T>
-    using deque = typename std::deque<T>;
-}
+    #include <deque>
+    namespace GameEngine::Utilities {
+        template<typename T>
+        using deque = typename std::deque<T>;
+    }
 #endif
 
 namespace GameEngine::Utilities {

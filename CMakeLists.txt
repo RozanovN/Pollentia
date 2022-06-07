@@ -3,4 +3,4 @@ project(GameEngine)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_library(GameEngine src/entities/Entity.cpp)
+add_library(GameEngine src/entities/Entity.cpp src/geometry/Vector2.cpp)

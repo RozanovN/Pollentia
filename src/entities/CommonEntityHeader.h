@@ -1,9 +1,3 @@
-//
-// Created by Nikolay on 2022-04-28.
-//
+#pragma once
 
-#ifndef GAMEENGINE_COMMONENTITYHEADER_H
-    #define GAMEENGINE_COMMONENTITYHEADER_H
-    #include "Id.h"
-
-#endif //GAMEENGINE_COMMONENTITYHEADER_H
+#include "Id.h"

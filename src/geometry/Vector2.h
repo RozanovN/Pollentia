@@ -1,9 +1,4 @@
-//
-// Created by Nikolay on 2022-04-24.
-//
-
-#ifndef GAMEENGINE_VECTOR2_H
-#define GAMEENGINE_VECTOR2_H
+#pragma once
 
 /**
  * Represents a 2 dimensional vector.
@@ -13,20 +8,20 @@
  */
 class Vector2 {
     private:
-        double x;
-        double y;
+        double x_;
+        double y_;
     public:
 
         /**
-         * Constructs a new 2 dimensional vector with 0 for x and 0 for y.
+         * Constructs a new 2 dimensional vector with 0 for x_ and 0 for y_.
          */
         Vector2();
 
         /**
          * Constructs a new 2 dimensional vector with custom properties.
          *
-         * @param x a double representing x value
-         * @param y a double representing y value
+         * @param x a double representing x_ value
+         * @param y a double representing y_ value
          */
         Vector2(double x, double y);
 
@@ -36,37 +31,37 @@ class Vector2 {
         ~Vector2();
 
         /**
-         * Returns the x value of this Vector2.
+         * Returns the x_ value of this Vector2.
          *
-         * @return a double representing the x value of this Vector2
+         * @return a double representing the x_ value of this Vector2
          */
         [[nodiscard]] double get_x() const;
 
         /**
-         * Returns the y value of this Vector2.
+         * Returns the y_ value of this Vector2.
          *
-         * @return a double representing the y value of this Vector2
+         * @return a double representing the y_ value of this Vector2
          */
         [[nodiscard]] double get_y() const;
 
         /**
-         * Sets this Vector2's x value to new x value.
+         * Sets this Vector2's x_ value to new x_ value.
          *
-         * @param x a double representing new x value
+         * @param x a double representing new x_ value
          */
         void set_x(double x);
 
         /**
-         * Sets this Vector2's y value to new x value.
+         * Sets this Vector2's y_ value to new x_ value.
          *
-         * @param y a double representing new y value
+         * @param y a double representing new y_ value
          */
         void set_y(double y);
 
         /**
          * Returns the magnitude of this Vector2.
          *
-         * @return the sum of x^2 and y^2
+         * @return the sum of x_^2 and y_^2
          */
         [[nodiscard]] double magnitude() const;
 
@@ -137,6 +132,3 @@ class Vector2 {
          */
         void operator *= (double other);
 };
-
-
-#endif //GAMEENGINE_VECTOR2_H

@@ -1,26 +1,22 @@
-//
-// Created by Nikolay on 2022-04-26.
-//
+#pragma once
 
-#ifndef GAMEENGINE_PRIMITIVETYPES_H
-    #define GAMEENGINE_PRIMITIVETYPES_H
-    #include <cstdint>
+#include <cstdint>
 
-    // Unsigned integers
-    using unsinged64int = uint64_t;
-    using unsigned32int = uint32_t;
-    using unsinged16int = uint16_t;
-    using unsigned8bit = uint8_t;
+// Unsigned integers
+using unsinged64int = uint64_t;
+using unsigned32int = uint32_t;
+using unsinged16int = uint16_t;
+using unsigned8bit = uint8_t;
 
-    // Singed integers
-    using int64 = int64_t;
-    using int32 = int32_t;
-    using int16 = int16_t;
-    using int8 = int8_t;
+// Singed integers
+using int64 = int64_t;
+using int32 = int32_t;
+using int16 = int16_t;
+using int8 = int8_t;
 
-    /// @todo implement out of bounds for unsigned integers.
-    constexpr unsinged64int outOfBoundsUnsignedInt64 {0xffff'ffff'ffff'ffffull};
-    constexpr unsigned32int outOfBoundsUnsignedInt32 {0xffff'fffful};
-    constexpr unsinged16int outOfBoundsUnsignedInt16 {0xffff};
-    constexpr unsigned8bit outOfBoundsUnsignedInt8 {0xff};
-#endif //GAMEENGINE_PRIMITIVETYPES_H
+/// @todo implement out of bounds for unsigned integers.
+constexpr unsinged64int outOfBoundsUnsignedInt64 {0xffff'ffff'ffff'ffffull};
+constexpr unsigned32int outOfBoundsUnsignedInt32 {0xffff'fffful};
+constexpr unsinged16int outOfBoundsUnsignedInt16 {0xffff};
+constexpr unsigned8bit outOfBoundsUnsignedInt8 {0xff};
+
