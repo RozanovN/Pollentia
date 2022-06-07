@@ -14,7 +14,6 @@ using int32 = int32_t;
 using int16 = int16_t;
 using int8 = int8_t;
 
-/// @todo implement out of bounds for unsigned integers.
 constexpr unsinged64int outOfBoundsUnsignedInt64 {0xffff'ffff'ffff'ffffull};
 constexpr unsigned32int outOfBoundsUnsignedInt32 {0xffff'fffful};
 constexpr unsinged16int outOfBoundsUnsignedInt16 {0xffff};
