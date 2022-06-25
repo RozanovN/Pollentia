@@ -1,0 +1,5 @@
+set(PROJECT_PATH ${CMAKE_CURRENT_LIST_DIR}/..)
+set(SRC_PATH ${PROJECT_PATH}/src)
+if (WIN32)
+    set(PACKAGES_PATH ${PROJECT_PATH}/packages/win64-build-debug)
+endif()
