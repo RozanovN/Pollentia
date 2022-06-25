@@ -1,7 +1,4 @@
 # Project exclude paths
-/cmake-build-debug/
+/build
 .idea
-/cmake
-# for now
-/GameEngineLib
-/cmake
+/packages/*
