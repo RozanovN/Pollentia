@@ -1,8 +1,8 @@
 #pragma once
 #include <Eigen/Dense>
-#include "../../CommonMathHeader.h"
+#include "../CommonMathHeader.h"
 
-namespace Pollentia::Math::Geometry {
+namespace Pollentia::Math {
     using f32Vector2 = Eigen::Vector2f;
     using f64Vector2 = Eigen::Vector2d;
     using f32Vector3 = Eigen::Vector3f;

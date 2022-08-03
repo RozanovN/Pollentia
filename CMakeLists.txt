@@ -6,7 +6,7 @@ project(Pollentia)
 set(CMAKE_CXX_STANDARD 20)
 
 
-set(SOURCE_FILES src/entities/Entity.cpp)
+set(SOURCE_FILES src/libs/entities/Entity.cpp src/libs/entities/TransformationComponent.cpp)
 add_library(${PROJECT_NAME} ${SOURCE_FILES})
 
 find_package(OpenGL REQUIRED)

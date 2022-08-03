@@ -1,8 +1,9 @@
 #pragma once
 
-#include "../entities/CommonEntityHeader.h"
+#include "../../entities/CommonEntityHeader.h"
 
-namespace GameEngine::GameEntity {
+namespace Pollentia::API::GameEntity {
+    class TransformationComponent;
     DEFINE_ID_TYPE(entityId);
 
     /**
@@ -25,7 +26,7 @@ namespace GameEngine::GameEntity {
             /**
              * Constructs a new Entity with invalid id_ mask.
              */
-            constexpr explicit Entity() {
+            constexpr Entity() {
                 id_ = Id::invalidIdMask;
             }
 
@@ -47,6 +48,13 @@ namespace GameEngine::GameEntity {
             [[nodiscard]] constexpr bool is_valid() const {
                 return Id::is_valid(id_);
             }
+
+            /**
+             * Returns a transformation component that is associated with this entity.
+             *
+             * @return a TransformationComponent that is associated with this entity.
+             */
+            [[nodiscard]] API::GameEntity::TransformationComponent get_transformation_component() const;
 
         private:
             entityId id_;
